@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
 import { increment } from "../slices/gameSlice";
-import { GameCell } from "./GameCell";
 import { Gamefiled } from "./Gamefield";
 import { GameInfo } from "./GameInfo";
 
@@ -11,7 +10,7 @@ export const Game = () => {
     return (
         <div>
             <GameInfo />
-            <Gamefiled children={<GameCell />}/>
+            <Gamefiled />
             {value}
             <button
                 onDoubleClick={() => dispatch(increment())}

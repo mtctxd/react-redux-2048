@@ -1,0 +1,5 @@
+export const CELL_SIZE = 100;
+export const GAMEFIELD_COLUMNS = 4;
+export const GAMEFIELD_ROWS = 4;
+export const GAMEFIELD_WIDTH = CELL_SIZE * GAMEFIELD_COLUMNS;
+export const GAMEFIELD_HIGHT = CELL_SIZE * GAMEFIELD_ROWS;
