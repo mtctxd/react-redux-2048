@@ -8,9 +8,13 @@ export const Gamefiled = () => {
     console.log(gamefield);
     return (
         <div className="gamefield">
-            {gamefield.flat().map(cell => (
-                <GameCell key={cell.id} cell={ cell }/>
-            ))}
+            {gamefield.map((row, rowIndex) => row.map((cell, columnIndex) => {
+                const gridInfo = rowIndex + '' + columnIndex
+
+                return (
+                    <GameCell key={gridInfo} value={cell} row={rowIndex} column={columnIndex} gridInfo={gridInfo}/>
+                )
+            }))}
         </div>
     );
 };

@@ -1,23 +1,16 @@
-import { CELL_SIZE } from "../constants";
+import { CELL_SIZE } from '../constants';
 
-export const GameCell = ({ cell }) => {
-    const { value } = cell;
-    const { x, y } = cell.position;
+export const GameCell = ({ value, row, column, gridInfo }) => {
+  const cellPositionByStyle = {
+    top: `${row * CELL_SIZE}px`,
+    left: `${column * CELL_SIZE}px`,
+    width: `${CELL_SIZE}px`,
+    height: `${CELL_SIZE}px`,
+  };
 
-    const cellPositionByStyle = {
-         top: `${y * CELL_SIZE}px`,
-         left: `${x * CELL_SIZE}px`,
-         width: `${CELL_SIZE}px`,
-         height: `${CELL_SIZE}px`,
-    };
-
-    return (
-        <div className="gamecell" style={cellPositionByStyle}>
-            {value !== 0 && (
-                <div className="gamecell-info">
-                    {value}
-                </div>
-            )}
-        </div>
-    );
+  return (
+    <div className="gamecell" style={cellPositionByStyle}>
+      <div className='gamecell-info'>{value}</div>
+    </div>
+  );
 };
