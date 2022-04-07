@@ -38,25 +38,65 @@ const addRandom = (state) => {
   return addRandom(state);
 };
 
-const moveUp = (state) => {
-  // const state.gamefield = state.state.gamefield;
-
+const mooveUp = (state) => {
   for (let rowIndex = 0; rowIndex < state.gamefield.length; rowIndex++) {
     let row = state.gamefield[rowIndex];
     for (let columnIndex = 0; columnIndex < row.length; columnIndex++) {
       // let cell = state.gamefield[rowIndex][columnIndex];
-      if (rowIndex !== 0) {
-        // let upperCell = state.gamefield[rowIndex - 1][columnIndex];
-        if (!state.gamefield[rowIndex - 1][columnIndex]) {
-          console.log(`${rowIndex}${columnIndex}, cell: ${state.gamefield[rowIndex - 1][columnIndex]}`);
-          state.gamefield[rowIndex - 1][columnIndex] = state.gamefield[rowIndex][columnIndex]
-          state.gamefield[rowIndex][columnIndex] = 0;
+      // const mathCheck = state.gamefield[rowIndex - 1][columnIndex] = state.gamefield[rowIndex][columnIndex];
+
+      const mooveProvider = (y, x) => {
+        if (y !== 0) {
+          if (state.gamefield[y - 1][x] === state.gamefield[y][x]) {
+            state.gamefield[y - 1][x] = state.gamefield[y - 1][x] * 2;
+            state.gamefield[y][x] = 0;
+            console.log('added');
+          }
+          if (!state.gamefield[y - 1][x]) {
+            state.gamefield[y - 1][x] = state.gamefield[y][x];
+            state.gamefield[y][x] = 0;
+            return mooveProvider(y - 1, x);
+          }
         }
+
+        return;
       }
+
+      mooveProvider(rowIndex, columnIndex);
     }
   }
 };
 
+const mooveLeft = (state) => {
+  for (let rowIndex = 0; rowIndex < state.gamefield.length; rowIndex++) {
+    let row = state.gamefield[rowIndex];
+    for (let columnIndex = 0; columnIndex < row.length; columnIndex++) {
+      // let cell = state.gamefield[rowIndex][columnIndex];
+      // const mathCheck = state.gamefield[rowIndex - 1][columnIndex] = state.gamefield[rowIndex][columnIndex];
+
+      const mooveProvider = (y, x) => {
+        if (x !== 0) {
+          if (state.gamefield[y][x - 1] === state.gamefield[y][x]) {
+            state.gamefield[y][x - 1] = state.gamefield[y][x - 1] * 2;
+            state.gamefield[y][x] = 0;
+            console.log('added');
+          }
+          if (!state.gamefield[y][x - 1]) {
+            state.gamefield[y][x - 1] = state.gamefield[y][x];
+            state.gamefield[y][x] = 0;
+            return mooveProvider(y, x - 1);
+          }
+        }
+
+        return;
+      }
+
+      mooveProvider(rowIndex, columnIndex);
+    }
+  }
+};
+
+// make function that add random amount from 1 to 2
 addRandom(initialState);
 addRandom(initialState);
 
@@ -70,7 +110,7 @@ export const gameSlice = createSlice({
     gameControl: (state, action) => {
       switch (action.payload) {
         case 38: // UP 87
-          moveUp(state);
+          mooveUp(state);
           addRandom(state);
           return state;
 
@@ -79,7 +119,7 @@ export const gameSlice = createSlice({
           break;
 
         case 37: // LEFT 65
-          // state.value += 1;
+          mooveLeft(state);
           break;
 
         case 39: // RIGHT 68

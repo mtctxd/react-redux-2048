@@ -5,7 +5,7 @@ import { GameCell } from "./GameCell";
 export const Gamefiled = () => {
     const { gamefield } = useSelector(store => store);
 
-    console.table(gamefield);
+    // console.table(gamefield);
     return (
         <div className="gamefield">
             {gamefield.map((row, rowIndex) => row.map((cell, columnIndex) => {
