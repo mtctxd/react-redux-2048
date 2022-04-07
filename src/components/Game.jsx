@@ -1,22 +1,21 @@
-import { useDispatch, useSelector } from "react-redux";
-import { increment } from "../slices/gameSlice";
+import { useDispatch } from "react-redux";
+import { gameControl, increment } from "../slices/gameSlice";
 import { Gamefiled } from "./Gamefield";
 import { GameInfo } from "./GameInfo";
 
 export const Game = () => {
-    const { value } = useSelector(store => store);
     const dispatch = useDispatch();
 
+    const handleGameControl = (event) => dispatch(gameControl(event.keyCode))
+    
+    window.addEventListener('keydown', handleGameControl);
+
     return (
-        <div>
+        <div
+            onClick={() => dispatch(increment())}
+        >
             <GameInfo />
             <Gamefiled />
-            {value}
-            <button
-                onDoubleClick={() => dispatch(increment())}
-            >
-                ++++
-            </button>
         </div>
     );
 };

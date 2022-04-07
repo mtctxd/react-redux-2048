@@ -7,7 +7,7 @@ const randomNumberAdder = () => {
     case number >= 60 && number < 85:
       return 2;
 
-    case number >= 85 && number < 100:
+    case number >= 90 && number < 100:
       return 4;
 
     default:
@@ -16,13 +16,67 @@ const randomNumberAdder = () => {
 };
 
 const cellMaker = (x, y) => {
+  const position = {
+    x,
+    y,
+  };
+
+  const findNeighbour = (position) => {
+    if (position === 'top') {
+      if (y === 0) {
+        return null;
+      }
+  
+      return {
+        y: y - 1,
+        x,
+      }
+    }
+
+    if (position === 'bottom') {
+      if (y === GAMEFIELD_ROWS) {
+        return null;
+      }
+
+      return {
+        y: y + 1,
+        x,
+      }
+    }
+
+    if (position === 'left') {
+      if (x === 0) {
+        return null;
+      }
+
+      return {
+        y,
+        x: x - 1,
+      }
+    }
+
+    if (position === 'right') {
+      if (x === GAMEFIELD_COLUMNS) {
+        return null;
+      }
+
+      return {
+        y,
+        x: x + 1,
+      }
+    }
+  };
+
   return {
     id: x + '' + y,
     value: randomNumberAdder(),
-    position: {
-      x,
-      y,
-    },
+    position,
+    neighbours: {
+      top: findNeighbour('top'),
+      bottom: findNeighbour('bottom'),
+      left: findNeighbour('left'),
+      right: findNeighbour('right'),
+    }
   };
 };
 
