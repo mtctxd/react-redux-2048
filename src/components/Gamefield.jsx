@@ -1,5 +1,4 @@
 import { useSelector } from "react-redux";
-import { showGamefieldInfo } from "../feature/gamefieldMaker";
 import { GameCell } from "./GameCell";
 
 export const Gamefiled = () => {
@@ -12,7 +11,7 @@ export const Gamefiled = () => {
                 const gridInfo = rowIndex + '' + columnIndex
 
                 return (
-                    <GameCell key={gridInfo} value={cell} row={rowIndex} column={columnIndex} gridInfo={gridInfo}/>
+                    <GameCell key={gridInfo} value={cell} row={rowIndex} column={columnIndex} />
                 )
             }))}
         </div>
