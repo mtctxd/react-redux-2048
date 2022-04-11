@@ -12,6 +12,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - [ ] game win condition
 - [ ] add feature for continuing game after you won game
 - [ ] better design again
+- [ ] change numbers in gamefield to object like this <code>
+{value: number, position {x: number, y: number}}
+</code> so i can use coordinates in styles to make game animated, also add condition to state so that i can not spam buttons and animations will be correct
+
+
 
 
 ## Available Scripts
