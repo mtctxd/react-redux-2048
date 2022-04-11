@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addCellIfChanged } from '../feature/addCellIfChanged';
-// import { addRandom } from '../feature/addRandom';
+import { addRandom } from '../feature/addRandom';
 import {
   mooveDown,
   mooveHandler,
@@ -9,19 +8,27 @@ import {
   mooveUp,
 } from '../feature/gameControls';
 
-const initialState = {
-  value: 0,
+let initialState = {
+  highScore: 0,
+  scoreWinCondition: 2048,
+  score: 0,
+  isGameWin: false,
+  isGameLost: true,
+  isGameContinue: true,
   gamefield: [
-    // [0, 0, 0, 0],
-    // [0, 0, 0, 0],
-    // [0, 0, 0, 0],
-    // [0, 0, 0, 0],
-    [4, 0, 0, 0],
-    [2, 0, 0, 0],
     [0, 0, 0, 0],
-    [2, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
   ],
 };
+
+addRandom(initialState);
+addRandom(initialState);
+
+if (localStorage.getItem('GAME')) {
+  initialState = JSON.parse(localStorage.getItem('GAME'));
+}
 
 // make function that add random amount from 1 to 2
 // addRandom(initialState);
@@ -32,7 +39,7 @@ export const gameSlice = createSlice({
   initialState,
   reducers: {
     increment: (state) => {
-      state.value += 2;
+      state.score += 2;
     },
     gameControl: (state, action) => {
       switch (action.payload) {
@@ -60,7 +67,30 @@ export const gameSlice = createSlice({
           break;
       }
     },
+    // unused
+    continueGame: (state) => {
+      state.isGameWin = true;
+    },
+    restartGame: (state) => {
+      const stateWhenRestart = {
+        scoreWinCondition: 2048,
+        score: 0,
+        isGameWin: false,
+        isGameContinue: true,
+        gamefield: [
+          [0, 0, 0, 0],
+          [0, 0, 0, 0],
+          [0, 0, 0, 0],
+          [0, 0, 0, 0],
+        ],
+      };
+
+      Object.assign(state, stateWhenRestart);
+      addRandom(state);
+      addRandom(state);
+    },
   },
 });
 
-export const { increment, gameControl } = gameSlice.actions;
+export const { increment, gameControl, continueGame, restartGame } =
+  gameSlice.actions;

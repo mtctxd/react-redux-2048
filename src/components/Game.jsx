@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
-import { gameControl, increment } from "../slices/gameSlice";
+import { GAMEFIELD_WIDTH } from "../constants";
+import { gameControl } from "../slices/gameSlice";
 import { Gamefiled } from "./Gamefield";
 import { GameInfo } from "./GameInfo";
 
@@ -11,9 +12,7 @@ export const Game = () => {
     window.addEventListener('keydown', handleGameControl);
 
     return (
-        <div
-            onClick={() => dispatch(increment())}
-        >
+        <div className="game" style={{width: GAMEFIELD_WIDTH}}>
             <GameInfo />
             <Gamefiled />
         </div>

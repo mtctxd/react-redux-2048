@@ -2,6 +2,18 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## [DEMO](https://mtctxd.github.io/react-redux-2048)
 
+## TODO
+
+- [ ] scalebles, so i can choose size of my field
+    - [ ] rework addRandom() so that it will change based on gamefield size
+- [ ] better design obvious...
+- [ ] update README.md >__<
+- [ ] game over condition
+- [ ] game win condition
+- [ ] add feature for continuing game after you won game
+- [ ] better design again
+
+
 ## Available Scripts
 
 In the project directory, you can run:
